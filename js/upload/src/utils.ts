@@ -30,17 +30,9 @@ export function normalise_file(
 			data: file
 		};
 	} else if (Array.isArray(file)) {
-		const normalized_file: Array<FileData | null> = [];
-
 		for (const x of file) {
-			if (x === null) {
-				normalized_file.push(null);
-			} else {
-				normalized_file.push(normalise_file(x, root, root_url));
-			}
+			normalise_file(x, root, root_url);
 		}
-
-		return normalized_file as Array<FileData>;
 	} else if (file.is_file) {
 		if (root_url == null) {
 			file.data = root + "/file=" + file.name;
